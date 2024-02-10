@@ -1,0 +1,15 @@
+/*
+ * STM32F401cc_HAL_RCC.h
+ *
+ *  Created on: Feb 5, 2024
+ *      Author: alyma
+ */
+
+#ifndef MCAL_RCC_STM32F401CC_HAL_RCC_H_
+#define MCAL_RCC_STM32F401CC_HAL_RCC_H_
+
+
+
+
+
+#endif /* MCAL_RCC_STM32F401CC_HAL_RCC_H_ */

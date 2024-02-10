@@ -1,0 +1,1 @@
+Statically global variables for Status_Flag if Init function is called Like state Machine
