@@ -151,12 +151,12 @@
 			/*-----------*/
 
 			/*SYSCLK STATUS enum*/
-			typedef enum
-			{
-				HSI,
-				HSE,
-				PLL
-			}RCC_SYSCLKStatus_t;
+				typedef enum
+				{
+					HSI,
+					HSE,
+					PLL
+				}RCC_SYSCLKStatus_t;
 			/*------------------*/
 
 		/*-----*/

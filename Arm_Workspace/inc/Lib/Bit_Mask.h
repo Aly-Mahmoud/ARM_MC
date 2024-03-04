@@ -1,3 +1,4 @@
+/*Single Bit Masks*/
 #define BITNULL_MASK     0x00000000
 #define BIT00_MASK       0x00000001
 #define BIT01_MASK       0x00000002
@@ -31,3 +32,7 @@
 #define BIT29_MASK       0x20000000
 #define BIT30_MASK       0x40000000
 #define BIT31_MASK       0x80000000
+
+/*Multiple Bit Masks*/
+#define FIRST_TWO_BITS_MASK               	0x00000003
+#define FIRST_FOUR_BITS_MASK                0x0000000F
