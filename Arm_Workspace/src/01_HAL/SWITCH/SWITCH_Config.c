@@ -1,22 +1,23 @@
-#include "SWITCH_Config.h"
+#include "GPIO.h"
 
-SWITCH_strLEDConfig_t SWITCH_arrOfStrSWITCH[NUM_OF_SWITCHES] =
+#include "LED.h"
+#include "LED_Config.h"
+
+const SWITCH_strSWITCHConfig_t SWITCH_arrOfStrSWITCHs[NUM_OF_SWITCHEs] =
 {     
-    /*Just names of LEDs added by the user*/
-    /*[NAME_OF_SWITCH]= 
+    /*Just names of Switches added by the user*/
+    /*[NAME_OF_SWITCHEs]= 
     {
-        .SWITCH_enumPortNumber=      Select value from enum Port Number 
-        .SWITCH_enumPinNumber=       Select value from enum Pin Number 
-        .SWITCH_enumDir=             Select value form enum Direction
-        .SWITCH_enumConnectionType=  Select value from enum Active State
+        .Port=                 Select value from the following       ( GPIO_PORT_A , GPIO_PORT_B , GPIO_PORT_C )
+        .Pin=                  Select value from the following       ( GPIO_PIN_0 , GPIO_PIN_1 , GPIO_PIN_2 , ... , GPIO_PIN_15 ) 
+        .Connection=           Select value form the following       ( GPIO_MODE_IN_FL , GPIO_MODE_IN_PU, GPIO_MODE_IN_PD )
     }*/
-    
-    [SWITCH_1] = 
+
+    [SWITCH_Number_0]= 
     {
-        .SWITCH_enumPortNumber=        PortC,              /* Select value from enum Port Number */
-        .SWITCH_enumPinNumber=         Pin0,               /* Select value from enum Pin Number */
-        .SWITCH_enumDir=               Port_PinDir_Input,  /* Select value from enum Dir*/
-        .SWITCH_enumConnectionType=    SWITCH_PullDown     /* Select value from enum Connection Type*/
+        .Port          =    GPIO_PORT_B;                         
+        .Pin           =    GPIO_PIN_0;                        
+        .Connection    =    GPIO_MODE_IN_PD;                         
     }
     
  };

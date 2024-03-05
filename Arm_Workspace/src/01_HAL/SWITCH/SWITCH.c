@@ -1,27 +1,28 @@
 #include "SWITCH.h"
-#include "SWITCH_Config.h"
-#include "PORT_Config.h"
-#include "PORT.h"
-#include "Std_Types.h"
-#include "DIO.h"
-#include "DIO_Config.h"
+#include "GPIO.h"
 
-extern SWITCH_strLEDConfig_t SWITCH_arrOfStrSWITCH[NUM_OF_SWITCHES];
+extern SWITCH_strLEDConfig_t SWITCH_arrOfStrSWITCH[NUM_OF_SWITCHEs];
 
-SWITCH_enumSWITCHerrorState_t SWITCH_enumInit(void)
+GPIO_Error_t SWITCH_Init(void)
 {
-    extern PORT_strConfig_t PORT_arrofstr_HALComp[NUM_OF_SWITCHES];
+	GPIO_Error_t LOC_Status = GPIO_NOK;
+	GPIO_Pin_t Switch;    
 
-    for(int iter = 0; iter < NUM_OF_SWITCHES; iter++)
+    for(int iter = 0; iter < NUM_OF_SWITCHEs; iter++)
     {
-        PORT_arrofstr_HALComp[iter].Port_enumPortNumber= SWITCH_arrOfStrSWITCH[iter].SWITCH_enumPortNumber;
-        PORT_arrofstr_HALComp[iter].Port_enumPinNumber=  SWITCH_arrOfStrSWITCH[iter].SWITCH_enumPinNumber; 
-        PORT_arrofstr_HALComp[iter].PORT_enumPinDir=     SWITCH_arrOfStrSWITCH[iter].SWITCH_enumDir;           
+		Switch.pin    = SWITCH_arrOfStrSWITCH[idx].pin;
+		Switch.Port   = SWITCH_arrOfStrSWITCH[idx].Port;
+        Switch.Mode   = SWITCH_arrOfStrSWITCH[idx].Connection;
+        LOC_Status = GPIO_Init(&LED_arrOfStrLEDs);
     }
-	 PORT_PinConfig(&PORT_arrofstr_HALComp, NUM_OF_SWITCHES);
+    return LOC_Status;
 }
 
 SWITCH_enumSWITCHerrorState_t SWITCH_enumReadState (U8 SWITCH_Name,U8* SwitchState)
 {		
-		DIO_enumReadState(SWITCH_arrOfStrSWITCH[SWITCH_Name].SWITCH_enumPortNumber,SWITCH_arrOfStrSWITCH[SWITCH_Name].SWITCH_enumPinNumber,SwitchState);
+	    GPIO_Error_t LOC_Status = GPIO_NOK;
+
+		GPIO_Get_PinValue(SWITCH_arrOfStrSWITCH[SWITCH_Name].Port,SWITCH_arrOfStrSWITCH[SWITCH_Name].Pin, &SwitchState);
+ 
+        return LOC_Status;
 }
