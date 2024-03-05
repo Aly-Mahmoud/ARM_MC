@@ -86,7 +86,7 @@ typedef struct
                         /*-------------------------------------*/
 
                         /*Send the configuration to the register*/
-                            ((GPIOx_Peri_t*)(GPIO_pincfg->Port))->GPIOx_MODER = Local_RegCpy;     //leh bn3ml type casting hna tani msh na 3mltha mra fe al recieve step?
+                            ((GPIOx_Peri_t*)(GPIO_pincfg->Port))->GPIOx_MODER = Local_RegCpy;     
                         /*--------------------------------------*/
 
                     /*--------*/
