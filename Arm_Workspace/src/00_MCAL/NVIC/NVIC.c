@@ -361,7 +361,7 @@ NVIC_Error_Status NVIC_CFG_SetPriority      (IRQ_ID_t NVIC_IQR, U8 PreemptPri, U
     }
 }
 
-NVIC_Error_Status NVIC_Get_Priority(IRQ_ID_t NVIC_IQR, u32_t *Priority)
-{
+// NVIC_Error_Status NVIC_Get_Priority(IRQ_ID_t NVIC_IQR, u32_t *Priority)
+// {
     
-}
+// }
