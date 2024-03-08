@@ -26,11 +26,12 @@ void SYSTICK_Start(SYSTICK_ExecutionPattern_t ExecutionPattern );
     if ( ExecutionPattern == OneShot  )
     {
         SYSTICK->STK_CTRL =| COUNTER_CONTROL;
+        G_ExecutionPattern = OneShot;
     }
     else if ( ExecutionPattern == Periodic )
     {
         SYSTICK->STK_CTRL =| COUNTER_CONTROL;
-        G_ExecutionPattern = Periodic
+        G_ExecutionPattern = Periodic;
     }
     else 
     {
@@ -114,8 +115,8 @@ void SYSTICK_Handler (void)
         /*------------------------------------------*/
     }
 
-    if (G_ExecutionPattern == Periodic)
+    if (G_ExecutionPattern == OneShot)
     {
-        SYSTICK_Start( Periodic );
+        SYSTICK_Stop();
     }
 }
