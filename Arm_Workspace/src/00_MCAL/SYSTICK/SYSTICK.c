@@ -9,6 +9,7 @@ typedef struct
 } SYSTICK_Registerts_t;
 
 static systickcfg_t Systick_prvAppNotify;
+static U8 G_ExecutionPattern  = Periodic
 
 #define SYSTICK_BASEADDRESS     0xE000E010
 #define SYSTICK                 ((volatile SYSTICK_Registerts_t* const)SYSTICK_BASEADDRESS)
@@ -22,13 +23,14 @@ void SYSTICK_Start(SYSTICK_ExecutionPattern_t ExecutionPattern );
 {
     SYSTICK_Status_t SYSTICK_Status = SYSTICK_NOK; 
 
-    if ( ExecutionPattern == OneShot )
+    if ( ExecutionPattern == OneShot  )
     {
         SYSTICK->STK_CTRL =| COUNTER_CONTROL;
     }
     else if ( ExecutionPattern == Periodic )
     {
-            /*Write you code here*/
+        SYSTICK->STK_CTRL =| COUNTER_CONTROL;
+        G_ExecutionPattern = Periodic
     }
     else 
     {
@@ -103,11 +105,17 @@ void Systick_vidRegisterCallBack ( systickcfg_t Copy_pfCallBackFunction )
 /*this function will be called by the hardware after the time countdown end*/ /*How?should it be static?*/
 void SYSTICK_Handler (void)
 {   
+
     /*If the static var holds a function address*/
     if (Systick_prvAppNotify)
     {   
         /*Call the function in the application layer*/
             Systick_prvAppNotify();
         /*------------------------------------------*/
+    }
+
+    if (G_ExecutionPattern == Periodic)
+    {
+        SYSTICK_Start( Periodic );
     }
 }
