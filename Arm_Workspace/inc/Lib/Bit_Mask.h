@@ -35,4 +35,7 @@
 
 /*Multiple Bit Masks*/
 #define FIRST_TWO_BITS_MASK               	0x00000003
+#define FIRST_THREE_BITS_MASK               0x00000007
 #define FIRST_FOUR_BITS_MASK                0x0000000F
+
+/**/
