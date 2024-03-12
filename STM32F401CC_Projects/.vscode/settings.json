@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "stm32f401cc_hal_rcc.h": "c"
+        "stm32f401cc_hal_rcc.h": "c",
+        "gpio.h": "c"
     }
 }

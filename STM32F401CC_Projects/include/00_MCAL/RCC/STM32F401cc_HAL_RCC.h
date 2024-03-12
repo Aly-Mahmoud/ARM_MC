@@ -195,7 +195,7 @@
 			/*--------------------------------------------*/
 
 			/*Function for Configuration of PLL Pre Scalar*/
-				RCC_enuErrorStatus_t RCC_PLL_PreScalarConfig		( U8 Copy_u8PLLM , U16 Copy_u16PLLN , U8 Copy_u8PLLQ , U8 Copy_u8PLLP );
+				RCC_enuErrorStatus_t	RCC_PLL_PreScalarConfig	( U8 Copy_u8PLLM , U32 Copy_u16PLLN , U8 Copy_u8PLLQ , U8 Copy_u8PLLP );
 			/*--------------------------------------------*/		
 
 			/*----Function for Reading any CLK status----*/
@@ -203,7 +203,7 @@
 			/*-------------------------------------------*/
 
 			/*Function to Choose the desired system clk source*/
-				RCC_enuErrorStatus_t RCC_SetSYSCLK 					( U32 Copy_u32ClockSelection );
+				RCC_enuErrorStatus_t RCC_SetSYSCLK 				 	(    U32 SYSCLK_CLK    );
 			/*------------------------------------------------*/
 
 			/*Function to Reading SYSCLK source*/
@@ -217,15 +217,15 @@
 			/*AHB1*/
 
 				/*AHB1_PREscalar*/
-					RCC_enuErrorStatus_t RCC_AHB_PREscaler			(    U32 AHB_PREscalar    );
+					RCC_enuErrorStatus_t RCC_AHB_PREscaler			(  	  U32 AHB_PREscalar    );
 				/*--------------*/
 
 				/*AHB1 Set*/
-					RCC_enuErrorStatus_t RCC_SetAHB1Peripheral		(U32 Copy_u32AHB1Peripheral);
+					RCC_enuErrorStatus_t RCC_SetAHB1Peripheral		(		U32 AHB1ENR_PERI	);
 				/*--------*/
 
 				/*AHB1 Reset*/
-					RCC_enuErrorStatus_t RCC_ResetAHB1Peripheral	(U32 Copy_u32AHB1Peripheral);
+					RCC_enuErrorStatus_t RCC_ResetAHB1Peripheral	(		U32 AHB1ENR_PERI	);
 				/*----------*/
 
 			/*----*/
@@ -233,11 +233,11 @@
 			/*AHB2*/
 
 				/*AHB2 Set*/
-					RCC_enuErrorStatus_t RCC_SetAHB2Peripheral		(U32 Copy_u32AHB1Peripheral);
+					RCC_enuErrorStatus_t RCC_SetAHB2Peripheral		(		U32 AHB2ENR_PERI		);
 				/*--------*/
 
 				/*AHB2 Reset*/
-					RCC_enuErrorStatus_t RCC_ResetAHB2Peripheral	(U32 Copy_u32AHB1Peripheral);
+					RCC_enuErrorStatus_t RCC_ResetAHB2Peripheral	(		U32 AHB2ENR_PERI		);
 				/*---------*/
 
 			/*----*/
@@ -249,11 +249,11 @@
 				/*--------------*/			
 
 				/*APB1 Set*/
-					RCC_enuErrorStatus_t RCC_SetAPB1Peripheral		(U32 Copy_u32APB1Peripheral);
+					RCC_enuErrorStatus_t RCC_SetAPB1Peripheral		(		U32 APB1ENR_PERI	);
 				/*--------*/
 
 				/*APB1 Reset*/
-					RCC_enuErrorStatus_t RCC_ResetAPB1Peripheral	(U32 Copy_u32APB1Peripheral);
+					RCC_enuErrorStatus_t RCC_ResetAPB1Peripheral	(		U32 APB1ENR_PERI	);
 				/*----------*/
 
 			/*----*/
@@ -265,11 +265,11 @@
 				/*--------------*/	
 
 				/*APB2 Set*/
-					RCC_enuErrorStatus_t RCC_SetAPB2Peripheral		(U32 Copy_u32APB2Peripheral);
+					RCC_enuErrorStatus_t RCC_SetAPB2Peripheral		(		U32 AP2ENR_PERI		);
 				/*--------*/
 
 				/*APB2 Reset*/
-					RCC_enuErrorStatus_t RCC_ResetAPB2Peripheral	(U32 Copy_u32APB2Peripheral);
+					RCC_enuErrorStatus_t RCC_ResetAPB2Peripheral	(		U32 AP2ENR_PERI		);
 				/*---------*/
 
 			/*----*/

@@ -110,53 +110,50 @@
 			/*------------------------------------------------------------------------------------------*/
 
 			/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Function for Configuration of PLL Prescalar>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-				RCC_enuErrorStatus_t	RCC_PLL_PreScalarConfig	( U8 Copy_u8PLLM , U16 Copy_u16PLLN , U8 Copy_u8PLLQ , U8 Copy_u8PLLP )
+				RCC_enuErrorStatus_t	RCC_PLL_PreScalarConfig	( U8 Copy_u8PLLM , U32 Copy_u16PLLN , U8 Copy_u8PLLQ , U8 Copy_u8PLLP )
 				{
 					U32 local_u32_PLLStatus;
 					local_u32_PLLStatus = RCC->CR & BIT22_MASK; // Is PLL Enabled?
 
 					RCC_enuErrorStatus_t RCC_enuErrorStatus = RCC_NOK;
 
-						if (local_u32_PLLStatus)
+						// if (local_u32_PLLStatus)
+						// {
+						// 	RCC_enuErrorStatus = RCC_PLLON;
+						// }
+						 
+					 	if ( Copy_u16PLLN > 432 || Copy_u16PLLN < 192 )
 						{
-							RCC_enuErrorStatus = RCC_PLLON;
+							RCC_enuErrorStatus = RCC_InputError;
 						}
-						else 
+
+						else if (Copy_u8PLLM < 2 || Copy_u8PLLM > 63)
 						{
-
-							if (Copy_u8PLLM < 2 || Copy_u8PLLM > 63)
-							{
-								RCC_enuErrorStatus = RCC_InputError;
-							}
-
-							else if (Copy_u16PLLN < 192 || Copy_u16PLLN > 432)
-							{
-								RCC_enuErrorStatus = RCC_InputError;
-							}
-
-							else if (Copy_u8PLLQ < 2 || Copy_u8PLLQ > 15)
-							{
-								RCC_enuErrorStatus = RCC_InputError;
-							}
-
-							else if ( (Copy_u8PLLP != 2) || (Copy_u8PLLP != 4) || (Copy_u8PLLP != 6) || (Copy_u8PLLP != 8) )
-							{
-								RCC_enuErrorStatus = RCC_InputError;
-							}
-
-							else
-							{
-								Copy_u8PLLP = ( Copy_u8PLLP / 2 ) - 1;   // Coverting from 3 bit represetation to 2 bit representation to match data sheet specs
-								
-								local_u32_PLLStatus = Copy_u8PLLQ<<24 | Copy_u8PLLP<<16 | Copy_u16PLLN<<6 | Copy_u8PLLM<<0 ;
-								RCC->PLLCFGR |= local_u32_PLLStatus;
-								RCC_enuErrorStatus = RCC_OK;
-							}
-
+							RCC_enuErrorStatus = RCC_InputError;
 						}
+
+						else if (Copy_u8PLLQ < 2 || Copy_u8PLLQ > 15)
+						{
+							RCC_enuErrorStatus = RCC_InputError;
+						}
+
+						else if ( (Copy_u8PLLP != 2) && (Copy_u8PLLP != 4) && (Copy_u8PLLP != 6) && (Copy_u8PLLP != 8) )
+						{
+							RCC_enuErrorStatus = RCC_InputError;
+						}
+
+						else
+						{
+							Copy_u8PLLP = ( Copy_u8PLLP / 2 ) - 1;   // Coverting from 3 bit represetation to 2 bit representation to match data sheet specs
+							
+							local_u32_PLLStatus = Copy_u8PLLQ<<24 | Copy_u8PLLP<<16 | Copy_u16PLLN<<6 | Copy_u8PLLM<<0 ;
+							RCC->PLLCFGR |= local_u32_PLLStatus;
+							RCC_enuErrorStatus = RCC_OK;
+						}
+
 						return RCC_enuErrorStatus;
 
-				};
+				}
 			/*-------------------------------------------------------------------------------------------*/		
 
 			/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<Function for Reading any CLK Status>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
@@ -220,7 +217,7 @@
 					RCC_enuErrorStatus_t RCC_AHB_PREscaler			(    U32 AHB_PREscalar    )
 					{
 						RCC_enuErrorStatus_t RCC_enuErrorStatus  = RCC_NOK;
-						if(AHB_PREscalar == AHB_PRE_1 || AHB_PRE_2 || AHB_PRE_4 || AHB_PRE_8 || AHB_PRE_16 || AHB_PRE_64 || AHB_PRE_128 || AHB_PRE_256 || AHB_PRE_512 )
+						if(AHB_PREscalar == AHB_PRE_1 || AHB_PREscalar == AHB_PRE_2 || AHB_PREscalar == AHB_PRE_4 || AHB_PREscalar == AHB_PRE_8 || AHB_PREscalar == AHB_PRE_16 || AHB_PREscalar == AHB_PRE_64 || AHB_PREscalar == AHB_PRE_128 || AHB_PREscalar == AHB_PRE_256 || AHB_PREscalar == AHB_PRE_512)
 						{
 							U32 local_u32_AHB1_PREscalar   =  RCC->CFGR;
 							local_u32_AHB1_PREscalar      &= ~CLEAR_MAGIC_CFGR;
@@ -240,7 +237,7 @@
 						{
 							AHB1ENR_PERI &= ~AHB1ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->AHB1RSTR |= AHB1ENR_PERI;
+							RCC->AHB1ENR |= AHB1ENR_PERI;
 						}
 						else 
 						{
@@ -258,7 +255,7 @@
 						{
 							AHB1ENR_PERI &= ~AHB1ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->AHB1RSTR &= ~AHB1ENR_PERI;
+							RCC->AHB1ENR &= ~AHB1ENR_PERI;
 						}
 						else 
 						{
@@ -280,7 +277,7 @@
 						{
 							AHB2ENR_PERI &= ~AHB2ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->AHB2RSTR |= AHB2ENR_PERI;
+							RCC->AHB2ENR |= AHB2ENR_PERI;
 						}
 						else 
 						{
@@ -299,7 +296,7 @@
 						{
 							AHB2ENR_PERI &= ~AHB2ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->AHB2RSTR &= ~AHB2ENR_PERI;
+							RCC->AHB2ENR &= ~AHB2ENR_PERI;
 						}
 						else 
 						{
@@ -336,8 +333,8 @@
 
 						if ( APB1ENR_PERI & APB1ENR_PERI_VERFI_BIT )
 						{
-							APB1ENR_PERI &= ~APB1ENR_PERI;
-							RCC->APB1RSTR |= APB1ENR_PERI;
+							APB1ENR_PERI &= ~APB1ENR_PERI_VERFI_BIT;
+							RCC->APB1ENR |= APB1ENR_PERI;
 							RCC_enuErrorStatus  = RCC_OK;
 						}
 						return RCC_enuErrorStatus;
@@ -353,7 +350,7 @@
 						{
 							APB1ENR_PERI &= ~APB1ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->APB1RSTR &= ~APB1ENR_PERI;
+							RCC->APB1ENR &= ~APB1ENR_PERI;
 						}
 						else 
 						{
@@ -391,7 +388,7 @@
 						{
 							AP2ENR_PERI &= ~APB2ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->APB2RSTR |= AP2ENR_PERI;
+							RCC->APB2ENR |= AP2ENR_PERI;
 						}
 						else 
 						{
@@ -409,7 +406,7 @@
 						{
 							AP2ENR_PERI &= ~APB2ENR_PERI_VERFI_BIT;
 							RCC_enuErrorStatus = RCC_OK;
-							RCC->APB2RSTR &= ~AP2ENR_PERI;	
+							RCC->APB2ENR &= ~AP2ENR_PERI;	
 						}
 						else 
 						{
