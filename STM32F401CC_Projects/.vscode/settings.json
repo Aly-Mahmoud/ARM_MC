@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "stm32f401cc_hal_rcc.h": "c",
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "led_config.h": "c",
+        "std_types.h": "c",
+        "switch.h": "c",
+        "switch_config.h": "c"
     }
 }

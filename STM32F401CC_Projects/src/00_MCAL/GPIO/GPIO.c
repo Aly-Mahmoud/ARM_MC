@@ -117,7 +117,7 @@ typedef struct
                         /*--------------------------------------*/
 
                         /*Write the configured data by the user*/
-                            Local_RegCpy |= (((GPIO_pincfg->Pin_Mode)>>PUPD_OFFSET)&BIT00_MASK<<(GPIO_pincfg->Pin_num)*TWO_OFFSET);
+                            Local_RegCpy |= (((GPIO_pincfg->Pin_Mode)>>PUPD_OFFSET)<<((GPIO_pincfg->Pin_num)*TWO_OFFSET));
                         /*-------------------------------------*/
 
                         /*Send the configuration to the register*/
@@ -170,7 +170,7 @@ typedef struct
                     LOC_Status = GPIO_INVALID_PIN;
                 }
 
-                else if ( GPIO_STATE_RESET < GPIO_STATE_x || GPIO_STATE_x > GPIO_STATE_SET )
+                else if ( GPIO_STATE_RESET > GPIO_STATE_x || GPIO_STATE_x > GPIO_STATE_SET )
                 {
                     LOC_Status = GPIO_INVALID_STATE;
                 }
@@ -185,11 +185,11 @@ typedef struct
                     {
 
                         case GPIO_STATE_RESET :
-                            ((GPIOx_Peri_t *)GPIO_Port_x)->GPIOx_BSRR = 1 << GPIO_Pin_x;
+                            ((GPIOx_Peri_t *)GPIO_Port_x)->GPIOx_BSRR = 1 << (GPIO_Pin_x + HALF_WORD_OFFSET );
                         break;
 
                         case GPIO_STATE_SET :
-                            ((GPIOx_Peri_t *)GPIO_Port_x)->GPIOx_BSRR = 1 << ( GPIO_Pin_x + HALF_WORD_OFFSET );
+                            ((GPIOx_Peri_t *)GPIO_Port_x)->GPIOx_BSRR = 1 <<  GPIO_Pin_x ;
                         break;
 
                         default:
