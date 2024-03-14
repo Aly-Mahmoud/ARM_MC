@@ -11,7 +11,7 @@
         {  
             void *Port;
             U32  Pin;
-            U8   Connection;                                         
+            U32  Connection;                                         
         }SWITCH_strSWITCHConfig_t;
     /*-------------------------------------------------------------*/    
 

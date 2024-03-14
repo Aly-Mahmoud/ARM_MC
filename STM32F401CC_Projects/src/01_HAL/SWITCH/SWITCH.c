@@ -5,16 +5,19 @@ extern SWITCH_strSWITCHConfig_t SWITCH_arrOfStrSWITCHs[NUM_OF_SWITCHEs];
 
 GPIO_Error_t SWITCH_Init(void)
 {
+    int iter;
 	GPIO_Error_t LOC_Status = GPIO_NOK;
 	GPIO_Pin_t Switch;    
 
-    for(int iter = 0; iter < NUM_OF_SWITCHEs; iter++)
+    for(iter = 0; iter < NUM_OF_SWITCHEs ; iter++)
     {
-		Switch.Pin_num    = SWITCH_arrOfStrSWITCHs[iter].Pin;
-		Switch.Port       = SWITCH_arrOfStrSWITCHs[iter].Port;
+		Switch.Pin_num    = GPIO_PIN_7;
+		Switch.Port       = GPIO_PORT_A;
         Switch.Pin_Mode   = SWITCH_arrOfStrSWITCHs[iter].Connection;
 
         LOC_Status = GPIO_Init(&Switch);
+
+        LOC_Status = GPIO_OK;
     }
     return LOC_Status;
 }

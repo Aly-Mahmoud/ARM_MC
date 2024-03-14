@@ -140,7 +140,15 @@ int main ()
 
     LED_Init (  );
 
-    SWITCH_Init (  );
+    // GPIO_Pin_t Switch;
+
+    // Switch.Port = GPIO_PORT_A;
+    // Switch.Pin_num = GPIO_PIN_7;
+    // Switch.Pin_Mode = GPIO_MODE_IN_PD;
+    // Switch.Pin_Speed = GPIO_SPEED_MED; // don't care in this case asln
+    // GPIO_Init( &Switch ); 
+
+    SWITCH_Init(  );
 
     U8 Switch_State;
     Switch_State =0;
@@ -157,7 +165,7 @@ int main ()
         {
             LED_SetStatus( LED_Number_0 , LED_SET_ON );
         }
-        
+
     }
 }
 
