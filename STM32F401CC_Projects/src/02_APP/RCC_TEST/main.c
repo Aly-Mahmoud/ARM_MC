@@ -8,6 +8,8 @@
 
 #include "00_MCAL/NVIC/NVIC.h"
 
+#include "00_MCAL/SYSTICK/SYSTICK.h"
+
 
 #if 0
 int main ()
@@ -207,9 +209,21 @@ int main ()
 #endif
 
 #if 1
-void USART1_IRQHandler(void)
+
+#define OFF 0
+#define ON  1
+void SysTick_Handler(void)
 {
-    LED_Init (  );
+    static U8 status =OFF;
+    if(status==OFF)
+    {
+        LED_SetStatus(LED_Number_0,ON);
+    }
+    else 
+    {
+        LED_SetStatus(LED_Number_0,OFF);
+    }
+    status = ~status;
 }
 
 int main ()
@@ -223,20 +237,20 @@ int main ()
 
     RCC_SetSYSCLK 				( SYSCLK_PLL );
 
-    RCC_AHB_PREscaler			( AHB_PRE_1 );
+    RCC_AHB_PREscaler			( AHB_PRE_2 );
 
     RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
 
+     LED_Init (  );
+
 /**
- * NVIC TESTING
+ * SysTick TESTING
 */
-    NVIC_CFG_SetSubGroup(TWO_SUBGROUP);
+    SYSTICK_Init                (  );
 
-    NVIC_CFG_SetPriority (NVIC_USART1_IRQn, 1,0);
+    SYSTICK_SetTickTimeMS     (1000);
 
-    NVIC_CTRL_EnableIRQ(NVIC_USART1_IRQn);
-
-    NVIC_CTRL_SetIRQPending(NVIC_USART1_IRQn);
+    SYSTICK_Start         (Periodic);
 
     for(;;)
     {
