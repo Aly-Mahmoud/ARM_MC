@@ -6,6 +6,9 @@
 
 #include "01_HAL/SWITCH/SWITCH.h"
 
+#include "00_MCAL/NVIC/NVIC.h"
+
+
 #if 0
 int main ()
 {
@@ -121,7 +124,7 @@ int main ()
 }
 #endif
 
-
+# if 0
 int main ()
 {
 
@@ -139,14 +142,6 @@ int main ()
     RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
 
     LED_Init (  );
-
-    // GPIO_Pin_t Switch;
-
-    // Switch.Port = GPIO_PORT_A;
-    // Switch.Pin_num = GPIO_PIN_7;
-    // Switch.Pin_Mode = GPIO_MODE_IN_PD;
-    // Switch.Pin_Speed = GPIO_SPEED_MED; // don't care in this case asln
-    // GPIO_Init( &Switch ); 
 
     SWITCH_Init(  );
 
@@ -168,6 +163,87 @@ int main ()
 
     }
 }
+#endif
 
+#if 0
 
+void USART1_IRQHandler(void)
+{
+    LED_Init (  );
+}
+
+int main ()
+{
+    RCC_EnableClock				( CLK_HSI );
+    RCC_EnableClock				( CLK_HSE );
+    RCC_DisableClock            ( CLK_PLL );
+
+    RCC_SetSYSCLK 				( SYSCLK_HSE );
+    RCC_PLL_PreScalarConfig     ( 25 , 336 , 7 , 4 );
+
+    RCC_SetSYSCLK 				( SYSCLK_PLL );
+
+    RCC_AHB_PREscaler			( AHB_PRE_1 );
+
+    RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
+
+/**
+ * NVIC TESTING
+*/
+    NVIC_CFG_SetSubGroup(TWO_SUBGROUP);
+
+    NVIC_CFG_SetPriority (NVIC_USART1_IRQn, 1,0);
+
+    NVIC_CTRL_EnableIRQ(NVIC_USART1_IRQn);
+
+    NVIC_CTRL_SetIRQPending(NVIC_USART1_IRQn);
+
+    for(;;)
+    {
+
+    }
+    
+}
+#endif
+
+#if 1
+void USART1_IRQHandler(void)
+{
+    LED_Init (  );
+}
+
+int main ()
+{
+    RCC_EnableClock				( CLK_HSI );
+    RCC_EnableClock				( CLK_HSE );
+    RCC_DisableClock            ( CLK_PLL );
+
+    RCC_SetSYSCLK 				( SYSCLK_HSE );
+    RCC_PLL_PreScalarConfig     ( 25 , 336 , 7 , 4 );
+
+    RCC_SetSYSCLK 				( SYSCLK_PLL );
+
+    RCC_AHB_PREscaler			( AHB_PRE_1 );
+
+    RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
+
+/**
+ * NVIC TESTING
+*/
+    NVIC_CFG_SetSubGroup(TWO_SUBGROUP);
+
+    NVIC_CFG_SetPriority (NVIC_USART1_IRQn, 1,0);
+
+    NVIC_CTRL_EnableIRQ(NVIC_USART1_IRQn);
+
+    NVIC_CTRL_SetIRQPending(NVIC_USART1_IRQn);
+
+    for(;;)
+    {
+
+    }
+    
+}
+
+#endif
  

@@ -1,0 +1,67 @@
+#ifndef _IRQn
+#define _IRQn
+
+    #define IMPLEMENTED_PRIORITY_BITS          4
+
+    typedef enum {
+        NVIC_WWDG_IRQn =                     0x4000,
+        NVIC_EXTI16_PVD_IRQn =               0x4001,
+        NVIC_EXTI21_TAMP_STAMP_IRQn =        0x4002,
+        NVIC_EXTI22_RTC_WKUP_IRQn =          0x4003,
+        NVIC_FLASH_IRQn =                    0x4004,
+        NVIC_RCC_IRQn =                      0x4005,
+        NVIC_EXTI0_IRQn =                    0x4006,
+        NVIC_EXTI1_IRQn =                    0x4007,
+        NVIC_EXTI2_IRQn =                    0x4008,
+        NVIC_EXTI3_IRQn =                    0x4009,
+        NVIC_EXTI4_IRQn =                    0x400A,
+        NVIC_DMA1_Stream0_IRQn =             0x400B,
+        NVIC_DMA1_Stream1_IRQn =             0x400C,
+        NVIC_DMA1_Stream2_IRQn =             0x400D,
+        NVIC_DMA1_Stream3_IRQn =             0x400E,
+        NVIC_DMA1_Stream4_IRQn =             0x400F,
+        NVIC_DMA1_Stream5_IRQn =             0x4010,
+        NVIC_DMA1_Stream6_IRQn =             0x4011,
+        NVIC_ADC_IRQn =                      0x4012,
+        NVIC_EXTI9_5_IRQn =                  0x4017,
+        NVIC_TIM1_BRK_TIM9_IRQn =            0x4018,
+        NVIC_TIM1_UP_TIM10_IRQn =            0x4019,
+        NVIC_TIM1_TRG_COM_TIM11_IRQn =       0x401A,
+        NVIC_TIM1_CC_IRQn =                  0x401B,
+        NVIC_TIM2_IRQn =                     0x401C,
+        NVIC_TIM3_IRQn =                     0x401D,
+        NVIC_TIM4_IRQn =                     0x401E,
+        NVIC_I2C1_EV_IRQn =                  0x401F,
+        NVIC_I2C1_ER_IRQn =                  0x4020,
+        NVIC_I2C2_EV_IRQn =                  0x4021,
+        NVIC_I2C2_ER_IRQn =                  0x4022,
+        NVIC_SPI1_IRQn =                     0x4023,
+        NVIC_SPI2_IRQn =                     0x4024,
+        NVIC_USART1_IRQn =                   0x4025,
+        NVIC_USART2_IRQn =                   0x4026,
+        NVIC_EXTI15_10_IRQn =                0x4028,
+        NVIC_EXTI17_RTC_Alarm_IRQn =         0x4029,
+        NVIC_EXTI18_OTG_FS_WKUP_IRQn =       0x402A,
+        NVIC_DMA1_Stream7_IRQn =             0x402F,
+        NVIC_SDIO_IRQn =                     0x4031,
+        NVIC_TIM5_IRQn =                     0x4032,
+        NVIC_SPI3_IRQn =                     0x4033,
+        NVIC_DMA2_Stream0_IRQn =             0x4038,
+        NVIC_DMA2_Stream1_IRQn =             0x4039,
+        NVIC_DMA2_Stream2_IRQn =             0x403A,
+        NVIC_DMA2_Stream3_IRQn =             0x403B,
+        NVIC_DMA2_Stream4_IRQn =             0x403C,
+        NVIC_OTG_FS_IRQn =                   0x4043,
+        NVIC_DMA2_Stream5_IRQn =             0x4044,
+        NVIC_DMA2_Stream6_IRQn =             0x4045,
+        NVIC_DMA2_Stream7_IRQn =             0x4046,
+        NVIC_USART6_IRQn =                   0x4047,
+        NVIC_I2C3_EV_IRQn =                  0x4048,
+        NVIC_I2C3_ER_IRQn =                  0x4049,
+        NVIC_FPU_IRQn =                      0x4051,
+        NVIC_SPI4_IRQn =                     0x4054
+    } IRQ_ID_t;
+
+
+
+#endif
