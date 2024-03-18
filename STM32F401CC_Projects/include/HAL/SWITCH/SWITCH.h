@@ -1,8 +1,8 @@
 #ifndef SWITCH_H_
 #define SWITCH_H_
 
-    #include "00_MCAL/GPIO/GPIO.h"
-    #include "01_HAL/SWITCH/SWITCH_Config.h"
+    #include "MCAL/GPIO/GPIO.h"
+    #include "HAL/SWITCH/SWITCH_Config.h"
 	#include "Std_Types.h"
 
 

@@ -1,7 +1,7 @@
 #include "std_types.h"
 #include "Bit_Mask.h"
 
-#include "00_MCAL/IRQs/IRQs.h"
+#include "MCAL/IRQs/IRQs.h"
 
 
 typedef enum

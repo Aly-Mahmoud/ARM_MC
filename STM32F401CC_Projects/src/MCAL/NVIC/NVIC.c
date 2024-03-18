@@ -1,4 +1,4 @@
-#include "00_MCAL/NVIC/NVIC.h"
+#include "MCAL/NVIC/NVIC.h"
 
 #define NVIC_REG_THRESHOLD      32
 #define PRIGROUP_POSI_BITS      8

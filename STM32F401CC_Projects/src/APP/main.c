@@ -1,14 +1,14 @@
-#include "00_MCAL/RCC/STM32F401cc_HAL_RCC.h"
+#include "MCAL/RCC/STM32F401cc_HAL_RCC.h"
 
-#include "00_MCAL/GPIO/GPIO.h"
+#include "MCAL/GPIO/GPIO.h"
 
-#include "01_HAL/LED/LED.h"
+#include "HAL/LED/LED.h"
 
-#include "01_HAL/SWITCH/SWITCH.h"
+#include "HAL/SWITCH/SWITCH.h"
 
-#include "00_MCAL/NVIC/NVIC.h"
+#include "MCAL/NVIC/NVIC.h"
 
-#include "00_MCAL/SYSTICK/SYSTICK.h"
+#include "MCAL/SYSTICK/SYSTICK.h"
 
 
 #if 0

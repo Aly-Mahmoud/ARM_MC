@@ -1,4 +1,4 @@
-#include "00_MCAL/SYSTICK/SYSTICK.h"
+#include "MCAL/SYSTICK/SYSTICK.h"
 
 typedef struct
 {

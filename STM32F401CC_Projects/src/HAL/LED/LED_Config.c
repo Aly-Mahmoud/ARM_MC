@@ -1,7 +1,7 @@
 #include "00_MCAL/GPIO/GPIO.h"
 
-#include "01_HAL/LED/LED.h"
-#include "01_HAL/LED/LED_Config.h"
+#include "HAL/LED/LED.h"
+#include "HAL/LED/LED_Config.h"
 
 const LED_strLEDConfig_t LED_arrOfStrLEDs[NUM_OF_LEDS] =
 {     

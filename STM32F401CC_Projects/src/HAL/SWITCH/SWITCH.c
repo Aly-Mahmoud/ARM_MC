@@ -1,5 +1,5 @@
-#include "01_HAL/SWITCH/SWITCH.h"
-#include "00_MCAL/GPIO/GPIO.h"
+#include "HAL/SWITCH/SWITCH.h"
+#include "MCAL/GPIO/GPIO.h"
 
 extern SWITCH_strSWITCHConfig_t SWITCH_arrOfStrSWITCHs[NUM_OF_SWITCHEs];
 

@@ -1,4 +1,4 @@
-#include "00_MCAL/GPIO/GPIO.h"
+#include "MCAL/GPIO/GPIO.h"
 
 typedef struct
 {

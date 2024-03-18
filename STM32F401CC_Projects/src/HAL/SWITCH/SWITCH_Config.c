@@ -1,7 +1,7 @@
-#include "00_MCAL/GPIO/GPIO.h"
+#include "MCAL/GPIO/GPIO.h"
 
-#include "01_HAL/SWITCH/SWITCH.h"
-#include "01_HAL/SWITCH/SWITCH_Config.h"
+#include "HAL/SWITCH/SWITCH.h"
+#include "HAL/SWITCH/SWITCH_Config.h"
 
 const SWITCH_strSWITCHConfig_t SWITCH_arrOfStrSWITCHs[NUM_OF_SWITCHEs] =
 {     

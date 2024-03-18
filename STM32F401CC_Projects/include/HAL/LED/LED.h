@@ -1,8 +1,8 @@
 #ifndef LED_H_
 #define LED_H_
 
-    #include "00_MCAL/GPIO/GPIO.h"
-    #include "01_HAL/LED/LED_Config.h"
+    #include "MCAL/GPIO/GPIO.h"
+    #include "HAL/LED/LED_Config.h"
 	#include "Std_Types.h"
 
     /*Macros to be used by user*/
