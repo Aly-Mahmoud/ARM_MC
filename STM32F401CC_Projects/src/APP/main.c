@@ -10,8 +10,17 @@
 
 #include "MCAL/SYSTICK/SYSTICK.h"
 
+#include "SERVICE/SCHEDULER/SCHEDULER.h"
 
-#if 0
+#define RCC_TEST                0
+#define GPIO_TEST               0
+#define LED_SWITCH_TEST         0
+#define NVIC_TEST               0
+#define SYSTICK_TEST            0
+#define SCHEDULER_TEST          1
+
+
+#if RCC_TEST
 int main ()
 {
     RCC_EnableClock				( CLK_HSI );
@@ -70,7 +79,7 @@ int main ()
 }
 #endif
 
-#if 0
+#if GPIO_TEST
 int main ()
 {
 
@@ -126,7 +135,7 @@ int main ()
 }
 #endif
 
-# if 0
+# if LED_SWITCH_TEST
 int main ()
 {
 
@@ -167,7 +176,7 @@ int main ()
 }
 #endif
 
-#if 0
+#if NVIC_TEST
 
 void USART1_IRQHandler(void)
 {
@@ -208,11 +217,12 @@ int main ()
 }
 #endif
 
-#if 1
+#if SYSTICK_TEST
 
 #define OFF 0
 #define ON  1
-void SysTick_Handler(void)
+
+void Toggle_Led(void)
 {
     static U8 status =OFF;
     if(status==OFF)
@@ -232,12 +242,9 @@ int main ()
     RCC_EnableClock				( CLK_HSE );
     RCC_DisableClock            ( CLK_PLL );
 
-    RCC_SetSYSCLK 				( SYSCLK_HSE );
-    RCC_PLL_PreScalarConfig     ( 25 , 336 , 7 , 4 );
+    RCC_SetSYSCLK 				( SYSCLK_HSI );
 
-    RCC_SetSYSCLK 				( SYSCLK_PLL );
-
-    RCC_AHB_PREscaler			( AHB_PRE_2 );
+    RCC_AHB_PREscaler			( AHB_PRE_1 );
 
     RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
 
@@ -247,10 +254,12 @@ int main ()
  * SysTick TESTING
 */
     SYSTICK_Init                (  );
+ 
+    SYSTICK_SetTickTimeMS       ( 1000 );
 
-    SYSTICK_SetTickTimeMS     (1000);
+    Systick_vidRegisterCallBack ( Toggle_Led );
 
-    SYSTICK_Start         (Periodic);
+    SYSTICK_Start               ( Periodic );   
 
     for(;;)
     {
@@ -260,4 +269,23 @@ int main ()
 }
 
 #endif
- 
+
+#if SCHEDULER_TEST
+
+int main ()
+{
+    RCC_EnableClock				( CLK_HSI );
+    RCC_SetSYSCLK 				( SYSCLK_HSI );
+    RCC_AHB_PREscaler			( AHB_PRE_1 );
+    RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
+
+    LED_Init                    (  );
+
+    SWITCH_Init                 (  );
+
+    Schedular_Init              (  );
+
+    Schedular_Start             (  );
+}
+
+#endif

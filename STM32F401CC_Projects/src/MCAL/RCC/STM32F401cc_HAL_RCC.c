@@ -41,17 +41,20 @@
 /*-----*/
 
 /*Define*/
-    #define RCC_u32BASEADDRESS 		 0x40023800
+    #define RCC_u32BASEADDRESS 		 	0x40023800
 
-    #define RCC						((RCC_Peri_t* )(RCC_u32BASEADDRESS))
+    #define RCC							((RCC_Peri_t* )(RCC_u32BASEADDRESS))
 
-    #define CLEAR_MAGIC_CFGR		0x00000003
+    #define CLEAR_MAGIC_CFGR			0x00000003
 
-	#define CLEAR_MAGIC_AHBRSRR	    0x000000F0
+	#define CLEAR_MAGIC_AHBRSRR	    	0x000000F0
 
-	#define CLEAR_MAGIC_APB2RSRR	0x00001C00
+	#define CLEAR_MAGIC_APB1RSRR		0x0000E000
 
-	#define CLEAR_MAGIC_APB1RSRR	0x0000E000
+	#define CLEAR_MAGIC_APB2RSRR		0x00001C00
+
+
+
 /*------*/
 
 /*Var*/
@@ -220,7 +223,7 @@
 						if(AHB_PREscalar == AHB_PRE_1 || AHB_PREscalar == AHB_PRE_2 || AHB_PREscalar == AHB_PRE_4 || AHB_PREscalar == AHB_PRE_8 || AHB_PREscalar == AHB_PRE_16 || AHB_PREscalar == AHB_PRE_64 || AHB_PREscalar == AHB_PRE_128 || AHB_PREscalar == AHB_PRE_256 || AHB_PREscalar == AHB_PRE_512)
 						{
 							U32 local_u32_AHB1_PREscalar   =  RCC->CFGR;
-							local_u32_AHB1_PREscalar      &= ~CLEAR_MAGIC_CFGR;
+							local_u32_AHB1_PREscalar      &= ~CLEAR_MAGIC_AHBRSRR;
 							local_u32_AHB1_PREscalar      |=  AHB_PREscalar;
 							RCC->CFGR                      =  local_u32_AHB1_PREscalar;
 							RCC_enuErrorStatus             =  RCC_OK;
@@ -317,7 +320,7 @@
 						if(APB1_PREscalar == APB_PRE1_1 || APB_PRE1_2 || APB_PRE1_4 || APB_PRE1_8 || APB_PRE1_16 )
 						{
 							U32 local_u32_APB1_PREscalar   =  RCC->CFGR;
-							local_u32_APB1_PREscalar  &= ~CLEAR_MAGIC_CFGR;
+							local_u32_APB1_PREscalar  &= ~CLEAR_MAGIC_APB1RSRR;
 							local_u32_APB1_PREscalar  |=  APB1_PREscalar;
 							RCC->CFGR                  =  local_u32_APB1_PREscalar;
 							RCC_enuErrorStatus         =  RCC_OK;
@@ -371,7 +374,7 @@
 						if(APB2_PREscalar == APB_PRE2_1 || APB_PRE2_2 || APB_PRE2_4 || APB_PRE2_8 || APB_PRE2_16 )
 						{
 							U32 local_u32_APB2_PREscalar   =  RCC->CFGR;
-							local_u32_APB2_PREscalar  &= ~CLEAR_MAGIC_CFGR;
+							local_u32_APB2_PREscalar  &= ~CLEAR_MAGIC_APB2RSRR;
 							local_u32_APB2_PREscalar  |=  APB2_PREscalar;
 							RCC->CFGR                  =  local_u32_APB2_PREscalar;
 							RCC_enuErrorStatus         =  RCC_OK;

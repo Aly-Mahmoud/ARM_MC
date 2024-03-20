@@ -4,6 +4,21 @@
     #include "MCAL/GPIO/GPIO.h"
     #include "HAL/SWITCH/SWITCH_Config.h"
 	#include "Std_Types.h"
+    #include "Bit_Mask.h"
+
+    #define SW_PULL_UP             0x00000008
+    #define SW_PULL_DOWN           0x00000010
+
+    #define SW_STATE_PRESSED        0x00000001
+
+    #define SW_STABLE_COUNTER       5
+    
+    #define SWITCH_NOT_PRESSED      0
+    #define SWITCH_PRESSED          1
+
+    #define FOUR_BIT_OFFSET         BIT02_MASK
+
+
 
 
     /* -------------Struct for the LED Configuration-------------- */

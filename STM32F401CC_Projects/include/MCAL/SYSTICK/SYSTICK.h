@@ -12,7 +12,7 @@
         3. Program Control and Status register.
     */
 
-    #define AHB_FREQ                    42000000 
+    #define AHB_FREQ                    2000000
 
     #define COUNTER_CONTROL             BIT00_MASK
 
@@ -25,7 +25,7 @@
     #define CLKSRC_AHB                  BIT02_MASK
     #define CLKSRC_AHB_8                BITNULL_MASK
 
-    #define CLKSRC                      CLKSRC_AHB              //UerDev options : CLKSRC_AHB ,
+    #define CLKSRC                      CLKSRC_AHB_8              //UerDev options : CLKSRC_AHB ,
                                                                 //                 CLKSRC_AHB_8
 
     #define RELOAD_min_VALUE            0x00000001

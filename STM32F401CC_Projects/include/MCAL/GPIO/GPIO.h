@@ -72,7 +72,7 @@
     #define GPIO_FUNC_AF14      0x0000000E
     #define GPIO_FUNC_AF15      0x0000000F
 
-    /*Mactos for the GPIO Pin SET/RESET Value*/
+    /*Macros for the GPIO Pin SET/RESET Value*/
 
     #define GPIO_STATE_RESET    0
     #define GPIO_STATE_SET      1
@@ -86,6 +86,9 @@
 
     #define GPIOC_u32BASEADDRESS 		        0x40020800
     #define GPIO_PORT_C						    ((void* )(GPIOC_u32BASEADDRESS))
+
+    #define GPIO_MODE_Verfier                   BIT28_MASK
+    #define GPIO_SPEED_Verfire                  BIT29_MASK
 
     /*Error Enum*/
         typedef enum 

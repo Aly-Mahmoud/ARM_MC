@@ -66,11 +66,15 @@ SYSTICK_Status_t SYSTICK_SetTickTimeMS  ( U16 Copy_TickTime )
 {
     SYSTICK_Status_t SYSTICK_Status = SYSTICK_NOK;
 
-    U32 RELOAD_VALUE;
+    U32 RELOAD_VALUE = 0;
+    U32 TickPerMs    = 0;
 
-    RELOAD_VALUE = (AHB_FREQ * Copy_TickTime)/1000 - 1;
+    // RELOAD_VALUE = ((AHB_FREQ * Copy_TickTime)/1000) - 1;
+    TickPerMs = AHB_FREQ / 1000;
+    RELOAD_VALUE =( TickPerMs * Copy_TickTime ) -1;
 
-    if ( RELOAD_min_VALUE < RELOAD_VALUE && RELOAD_VALUE > RELOAD_MAX_VALUE )
+
+    if ( RELOAD_min_VALUE < RELOAD_VALUE && RELOAD_VALUE < RELOAD_MAX_VALUE )
     {
         SYSTICK_Status = SYSTICK_OK;
         SYSTICK->STK_LOAD = RELOAD_VALUE;
@@ -109,8 +113,8 @@ void Systick_vidRegisterCallBack ( systickcfg_t Copy_pfCallBackFunction )
     Systick_prvAppNotify = Copy_pfCallBackFunction;
 }
 
-/*this function will be called by the hardware after the time countdown end*/ /*How?should it be static?*/
-void SYSTICK_Handler (void)
+/*this function will be called by the hardware after the time countdown end*/ /*Should it be static?*/
+void  SysTick_Handler(void)
 {   
 
     /*If the static var holds a function address*/

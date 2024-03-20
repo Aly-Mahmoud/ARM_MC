@@ -5,6 +5,11 @@
         "led_config.h": "c",
         "std_types.h": "c",
         "switch.h": "c",
-        "switch_config.h": "c"
+        "switch_config.h": "c",
+        "scheduler.h": "c",
+        "systick.h": "c",
+        "bit_mask.h": "c",
+        "runnable_list.h": "c",
+        "led.h": "c"
     }
 }
