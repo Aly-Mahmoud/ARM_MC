@@ -10,6 +10,9 @@
         "systick.h": "c",
         "bit_mask.h": "c",
         "runnable_list.h": "c",
-        "led.h": "c"
+        "led.h": "c",
+        "lcd.h": "c",
+        "lcd_config.h": "c",
+        "delay_ms.h": "c"
     }
 }

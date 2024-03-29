@@ -277,7 +277,7 @@ int main ()
     RCC_EnableClock				( CLK_HSI );
     RCC_SetSYSCLK 				( SYSCLK_HSI );
     RCC_AHB_PREscaler			( AHB_PRE_1 );
-    RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA);
+    RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA );
 
     LED_Init                    (  );
 
