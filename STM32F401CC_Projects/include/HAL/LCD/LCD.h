@@ -4,14 +4,14 @@
 
     /*------------------------------Enum for error of LCD Driver----------------------------*/
         typedef enum{
-            LCD_enumOK,
             LCD_enumNOK,
             LCD_NullPointer,
             LCD_enumWrong_PortNo,
             LCD_enumWrong_PinNo,
             LCD_enumWrong_Value,
             LCD_enumOutof_Range,
-            LCD_enumNotReady
+            LCD_enumNotReady,
+            LCD_enumOK
         }LCD_enuErrorStatus_t;
     /*--------------------------------------------------------------------------------------*/
 
@@ -53,7 +53,7 @@
         {
             U8     stringCursorPosition;
             void   *CB;
-        }Write;
+        }Write_t;
         
 
     /*---------------------------------------------------------------------------------------*/
@@ -91,16 +91,16 @@
     /*---------------------------------------------------------------------------------------*/
 /*****/
 
-/*Extra*/	
-	/*-------------------------------ShiftDisplay+Cursor-------------------------------------*/
-	    LCD_enuErrorStatus_t LCD_ShiftDisplay(ShiftDir_t ShiftDir);
-	/*---------------------------------------------------------------------------------------*/	
+// /*Extra*/	
+// 	/*-------------------------------ShiftDisplay+Cursor-------------------------------------*/
+// 	    LCD_enuErrorStatus_t LCD_ShiftDisplay(ShiftDir_t ShiftDir);
+// 	/*---------------------------------------------------------------------------------------*/	
 
-    /*-----------------------------------Write Number Function------------------------------*/
-		 LCD_enuErrorStatus_t LCD_enuWriteNumber(U8 Copy_u8Number);
-    /*--------------------------------------------------------------------------------------*/    
-/******/    
-/*------*/
+//     /*-----------------------------------Write Number Function------------------------------*/
+// 		 LCD_enuErrorStatus_t LCD_enuWriteNumber(U8 Copy_u8Number);
+//     /*--------------------------------------------------------------------------------------*/    
+// /******/    
+// /*------*/
 
 
 
