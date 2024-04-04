@@ -17,7 +17,8 @@
 #define LED_SWITCH_TEST         0
 #define NVIC_TEST               0
 #define SYSTICK_TEST            0
-#define SCHEDULER_TEST          1
+#define SCHEDULER_TEST          0
+#define SCHEDULER_LCD_TEST      1
 
 
 #if RCC_TEST
@@ -282,6 +283,22 @@ int main ()
     LED_Init                    (  );
 
     SWITCH_Init                 (  );
+
+    Schedular_Init              (  );
+
+    Schedular_Start             (  );
+}
+
+#endif
+
+#if SCHEDULER_LCD_TEST
+
+int main ()
+{
+    RCC_EnableClock				( CLK_HSI );
+    RCC_SetSYSCLK 				( SYSCLK_HSI );
+    RCC_AHB_PREscaler			( AHB_PRE_1 );
+    RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA );
 
     Schedular_Init              (  );
 

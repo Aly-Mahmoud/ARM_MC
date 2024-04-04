@@ -5,6 +5,7 @@ extern void Runnable_LED_Toggle_TASK(void);
 extern void Runnable_GET_SWITCH_STATE_TASK(void);
 extern void Runnable_SWITCH_Control_LED(void);
 extern void Runnable_TrafficLight_StateMachine(void);
+extern void Runnable_LCD_TASK(void);
 
 Runnable_t Runnables[] =
                                     {
@@ -18,35 +19,11 @@ Runnable_t Runnables[] =
                                         }
                                         ,
                                     */
-                                        [Led_Toggle]=
+                                        [LCD_Runnable]=
                                         {
-                                            .name          =  "Toggle Led",
-                                            .PeriodicityMs =  1000,
-                                            .CB            =  Runnable_LED_Toggle_TASK,
-                                            .delayms       =  0,
-                                        }
-                                        ,
-                                        [SWITCH_GET_STATE]=
-                                        {
-                                            .name          =  "Get the state of all the switches",
-                                            .PeriodicityMs =  10,
-                                            .CB            =  Runnable_GET_SWITCH_STATE_TASK,
-                                            .delayms       =  0,
-                                        }
-                                        ,
-                                        [SWITCH_CONTROL_LED]=
-                                        {
-                                            .name          =  "SWITCH CONTROL LED",
-                                            .PeriodicityMs =  200,
-                                            .CB            =  Runnable_SWITCH_Control_LED,
-                                            .delayms       =  0,
-                                        }
-                                        ,
-                                        [TRAFFIC_LIGHT]=
-                                        {
-                                            .name          =  "TRAFFIC LIGHT State Machine",
+                                            .name          =  "LCD",
                                             .PeriodicityMs =  100,
-                                            .CB            =  Runnable_TrafficLight_StateMachine,
+                                            .CB            =  Runnable_LCD_TASK,
                                             .delayms       =  0,
-                                        }                                   
+                                        }
                                     };

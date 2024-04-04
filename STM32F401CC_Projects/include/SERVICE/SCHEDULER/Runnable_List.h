@@ -3,10 +3,7 @@
 
     typedef enum 
     {
-        Led_Toggle,
-        SWITCH_GET_STATE,
-        SWITCH_CONTROL_LED,
-        TRAFFIC_LIGHT,
+        LCD_Runnable,
         _Run_Num
     }Runnables_names_t;
 

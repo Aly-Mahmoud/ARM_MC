@@ -15,8 +15,8 @@ const LCD_strLCDPinConfig_t LCD_strLCDpinConfig[LCD_PINs]=
 
      [RS]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_0
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_8
     }
 
  /*-------*/
@@ -24,80 +24,80 @@ const LCD_strLCDPinConfig_t LCD_strLCDpinConfig[LCD_PINs]=
  /*RW pin*/
     [RW]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_1
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_9
     }
  /*-------*/
  ,
  /*ET pin*/
     [ET]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_2
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_10
     }
  /*-------*/
  ,
  /*Data 1st pin*/
     [LCD_D0]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_3
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_0
     }
  /*-------*/ 
  ,
  /*Data 2nd pin*/
     [LCD_D1]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_4
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_1
     }
  /*-------*/ 
  ,
  /*Data 3rd pin*/
     [LCD_D2]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_5
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_2
     }
  /*-------*/
  ,
  /*Data 4th pin*/
     [LCD_D3]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_6
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_3
     }
  /*-------*/ 
  ,
  /*Data 5th pin*/
     [LCD_D4]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_7
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_4
     }
  /*-------*/ 
  ,
  /*Data 6th pin*/
     [LCD_D5]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_8
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_5
     }
  /*-------*/ 
  ,
  /*Data 7th pin*/
     [LCD_D6]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_9
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_6
     }
  /*-------*/
  ,
  /*Data 8th pin*/
     [LCD_D7]=
     {
-        .LCD_PortNumber = GPIO_PORT_B,
-        .LCD_PinNumber  = GPIO_PIN_10
+        .LCD_PortNumber = GPIO_PORT_A,
+        .LCD_PinNumber  = GPIO_PIN_7
     }
  /*-------*/ 
 };
