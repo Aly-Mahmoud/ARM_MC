@@ -269,7 +269,7 @@
 				/*--------*/
 
 				/*APB2 Reset*/
-					RCC_enuErrorStatus_t RCC_ResetAPB2Peripheral	(		U32 AP2ENR_PERI		);
+					RCC_enuErrorStatus_t RCC_SetAPB2Peripheral		(		U32 AP2ENR_PERI		);
 				/*---------*/
 
 			/*----*/

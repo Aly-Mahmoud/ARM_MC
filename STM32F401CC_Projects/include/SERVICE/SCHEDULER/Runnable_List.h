@@ -3,7 +3,8 @@
 
     typedef enum 
     {
-        LCD_Runnable,
+        LCD_Runnable_Mngr,
+        LCD_APP,
         _Run_Num
     }Runnables_names_t;
 

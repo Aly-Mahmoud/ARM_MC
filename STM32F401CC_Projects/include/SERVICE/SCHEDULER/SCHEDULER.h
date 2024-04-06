@@ -6,7 +6,7 @@
         #include "SERVICE/SCHEDULER/Runnable_List.h"
     /*--------*/
 
-    #define TICKTIME 10
+    #define TICKTIME 1
 
     /*Types*/
         typedef enum 

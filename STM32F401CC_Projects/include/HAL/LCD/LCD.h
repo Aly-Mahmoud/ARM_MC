@@ -1,5 +1,5 @@
-#ifndef LED_H_
-#define LED_H_
+#ifndef LCD_H_
+#define LCD_H_
 	#include "HAL/LCD/LCD_Config.h"
 
     /*------------------------------Enum for error of LCD Driver----------------------------*/
@@ -36,8 +36,9 @@
         {
             Power_On,
             Function_Set,
-            Entry,
             Display,
+            clear,
+            Entry,
             End
         }InitStage_t;
     /*-----------------------------------------------------------------------------------------*/

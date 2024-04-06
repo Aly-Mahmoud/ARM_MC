@@ -6,6 +6,8 @@
 
 #include "HAL/SWITCH/SWITCH.h"
 
+#include "HAL/LCD/LCD.h"
+
 #include "MCAL/NVIC/NVIC.h"
 
 #include "MCAL/SYSTICK/SYSTICK.h"
@@ -299,6 +301,8 @@ int main ()
     RCC_SetSYSCLK 				( SYSCLK_HSI );
     RCC_AHB_PREscaler			( AHB_PRE_1 );
     RCC_SetAHB1Peripheral		( AHB1ENR_GPOIA );
+
+    LCD_InitAsync();  
 
     Schedular_Init              (  );
 

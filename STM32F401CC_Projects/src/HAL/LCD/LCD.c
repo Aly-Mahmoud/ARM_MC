@@ -10,10 +10,6 @@
 *    IMH = Initialization Manager Helper 
 */
 
-/*****************************************Defines******************************************/
-
-/******************************************************************************************/
-
 /*--------------------------------------Enum for G_WriteState------------------------------*/
     typedef enum
     {
@@ -42,10 +38,11 @@
 /*---------------------------------------------------------------------------------------*/
 
 /*-------------------------------------Global Variables-----------------------------------*/
-    G_LCD_EnablePinState_t G_LCD_EnablePinState;
+    G_LCD_EnablePinState_t G_LCD_EnablePinState = LCD_EnablePin_OFF ;
     G_WriteState_t G_WriteState;
     U8 G_CurserPositionRstring;        /* Curser Position Related to String being written */
     U8 G_LCD_Curser_Data;
+
 /*----------------------------------------------------------------------------------------*/
 
 /*------------------------------------static functions------------------------------------*/
@@ -53,8 +50,6 @@
     static LCD_enuErrorStatus_t LCD_enuWriteCommand(U8 Copy_u8Command);
 
     static LCD_enuErrorStatus_t LCD_enuWriteData(U8 Copy_u8Data);
-
-    static void LCD_Runnable_Manager(void);
 
         static void LCD_Init_Manager (void);
 
@@ -66,12 +61,14 @@
 
         static void LCD_SetPostion_Proc(void);
 
+        static void LCD_CtrlEnablePin(U8 Copy_LCDEnablePinState);     
+
 /*--------------------------------------------------------------------------------------*/
 
 /*--------------------------------Functions to be used by user--------------------------*/
 
     /*--------------------------------LCD Initilization Function----------------------------*/
-        void LCD_InitAsync (void)
+        void LCD_InitAsync (void) 
         {
             /*UserReQ state*/
                 UserREQ.State = REQ_Pending;
@@ -80,6 +77,10 @@
             /*UserReQ Stage*/
                 UserREQ.LCD_STAGE = Init_Stage;
             /*------------*/
+
+            /*UserReQ 1st state*/
+                UserREQ.InitStage = Power_On;
+            /*----------------*/
         }
     /*--------------------------------------------------------------------------------------*/
 
@@ -161,7 +162,7 @@
         {
             LCD_enuErrorStatus_t LCD_enuErrorStatus = LCD_enumOK;
 
-            U8 LOC_u8data;
+            U8 LOC_u8data = 0;
 
             /*Error Handling*/
                 if(Copy_u8X >2 || Copy_u8X<1)
@@ -193,12 +194,12 @@
                 /*---------------*/
 
                 /* Getting Curser Data */
-                    if (Copy_u8X == 0)
+                    if (Copy_u8X == 1)
                     {
                         LOC_u8data = ( (LCD_SetCursor) + (Copy_u8Y-1) );
                     }
 
-                    else if (Copy_u8X == 1)
+                    else if (Copy_u8X == 2)
                     {
                         LOC_u8data = ( (LCD_SetCursor) + 64 + (Copy_u8Y-1) );
                     }
@@ -224,7 +225,7 @@
                 LCD_enuErrorStatus = LCD_NullPointer;
             }    
 
-            LCD_Status = UserREQ.State;
+            *LCD_Status = UserREQ.State;
 
             return LCD_enuErrorStatus;
         }
@@ -240,7 +241,7 @@
                 LCD_enuErrorStatus = LCD_NullPointer;
             }        
 
-            Op_State = UserREQ.Operation_Type;
+            *Op_State = UserREQ.Operation_Type;
 
             return LCD_enuErrorStatus;
         }
@@ -248,44 +249,43 @@
 
 /*--------------------------------------------------------------------------------------*/
 
-/*-------------------------------------Static functions---------------------------------*/
-      
-    /*-------------------------------LCD_RUNNABLE MANAGER--------------------------*/
-        void LCD_Runnable_Manager(void)
+/*-------------------------------LCD_RUNNABLE MANAGER--------------------------*/
+    void LCD_Runnable_Manager(void)
+    {
+        if (UserREQ.LCD_STAGE == Init_Stage && UserREQ.State == REQ_Pending)
         {
-            if (UserREQ.LCD_STAGE == Init_Stage && UserREQ.State == REQ_Pending)
+            LCD_Init_Manager();
+        }
+        else if (UserREQ.LCD_STAGE == Operation_Stage)
+        {
+            if(UserREQ.State == REQ_Pending)
             {
-                UserREQ.InitStage = Power_On;
-                LCD_Init_Manager();
-            }
-            else if (UserREQ.LCD_STAGE == Operation_Stage)
-            {
-                if(UserREQ.State == REQ_Pending)
+                switch (UserREQ.Operation_Type)
                 {
-                    switch (UserREQ.Operation_Type)
-                    {
-                        case Write:
-                            LCD_Write_Proc();                  
-                        break;
+                    case Write:
+                        LCD_Write_Proc();                  
+                    break;
 
-                        case Clear:
-                            LCD_Clear_Proc();                  
-                        break;
+                    case Clear:
+                        LCD_Clear_Proc();                  
+                    break;
 
-                        case SetPosition:
-                            LCD_SetPostion_Proc();             
-                        break;    
+                    case SetPosition:
+                        LCD_SetPostion_Proc();             
+                    break;    
 
-                        default:
-                                        
-                        break;
+                    default:
+                                    
+                    break;
 
-                    }
                 }
             }
         }
-    /*-----------------------------------------------------------------------------*/  
+    }
+/*-----------------------------------------------------------------------------*/  
 
+/*-------------------------------------Static functions---------------------------------*/
+      
     /*-----------------------------------LCD Init Manager--------------------------*/
         static void LCD_Init_Manager (void)
         {
@@ -298,21 +298,38 @@
 
                 case Function_Set: 
                     LCD_enuWriteCommand(FunctionSet);
-                    UserREQ.InitStage = Entry;           
-                break;
-
-                case Entry:
-                    LCD_enuWriteCommand(EntryModeSet);
-                    UserREQ.InitStage = Display;                        
+                    if ( G_LCD_EnablePinState == LCD_EnablePin_OFF)
+                    {
+                        UserREQ.InitStage = Display;           
+                    }
                 break;
 
                 case Display:
                     LCD_enuWriteCommand(DisplayControl);    
-                    UserREQ.InitStage = End;                         
+                    if ( G_LCD_EnablePinState == LCD_EnablePin_OFF)
+                    {
+                        UserREQ.InitStage = clear;            
+                    }   
+                break;
+
+                case clear:
+                    LCD_enuWriteCommand( ClearDisplay );
+                    if ( G_LCD_EnablePinState == LCD_EnablePin_OFF)
+                    {
+                        UserREQ.InitStage = Entry;         
+                    }   
+                break;
+
+                case Entry:
+                    LCD_enuWriteCommand(EntryModeSet);
+                    if ( G_LCD_EnablePinState == LCD_EnablePin_OFF)
+                    {
+                        UserREQ.InitStage = End;        
+                    }          
                 break;
 
                 case End:
-                    UserREQ.InitStage = Operation_Stage;
+                    UserREQ.LCD_STAGE = Operation_Stage;
                     UserREQ.State = readyForNewRequest;
                 break;
             }
@@ -359,7 +376,7 @@
                 break;
 
                 case Writing_State:
-                    if ( G_CurserPositionRstring =! UserREQ.Length )
+                    if ( (G_CurserPositionRstring) != (UserREQ.Length) )
                     {
                         LCD_enuWriteData( UserREQ.String[ G_CurserPositionRstring ] );
 
@@ -389,7 +406,7 @@
         {
             LCD_enuWriteCommand( ClearDisplay );
 
-            if (G_LCD_EnablePinState = LCD_EnablePin_OFF)
+            if ((G_LCD_EnablePinState) == (LCD_EnablePin_OFF))
             {
                 UserREQ.State = readyForNewRequest;
                 UserREQ.Operation_Type  = None;
@@ -402,7 +419,7 @@
         {
             LCD_enuWriteCommand( G_LCD_Curser_Data );
 
-            if (G_LCD_EnablePinState = LCD_EnablePin_OFF)
+            if (G_LCD_EnablePinState == LCD_EnablePin_OFF)
             {
                 UserREQ.State = readyForNewRequest;
                 UserREQ.Operation_Type  = None;
@@ -413,6 +430,14 @@
     /*----------------------------------Write Command------------------------------*/
         static LCD_enuErrorStatus_t LCD_enuWriteCommand(U8 Copy_u8Command)
         {
+            extern const LCD_strLCDPinConfig_t LCD_strLCDpinConfig[LCD_PINs];
+
+            LCD_enuErrorStatus_t LCD_enuErrorStatus = LCD_enumOK;
+
+            GPIO_Error_t GPIO_Error_1 = GPIO_NOK;
+            GPIO_Error_t GPIO_Error_2 = GPIO_NOK;
+            GPIO_Error_t GPIO_Error_3 = GPIO_NOK;
+
             switch (G_LCD_EnablePinState)
             {
                 case LCD_EnablePin_OFF:
@@ -421,20 +446,32 @@
                     /*-----------------*/
 
                     /*Registers Set*/
-                        GPIO_Set_PinValue ( LCD_strLCDpinConfig [ RS ] .LCD_PortNumber , LCD_strLCDpinConfig [ RS ] .LCD_PinNumber , GPIO_STATE_RESET );
-                        GPIO_Set_PinValue ( LCD_strLCDpinConfig [ RW ] .LCD_PortNumber , LCD_strLCDpinConfig [ RW ] .LCD_PinNumber , GPIO_STATE_RESET );
+                        GPIO_Error_1 = GPIO_Set_PinValue ( LCD_strLCDpinConfig [ RS ] .LCD_PortNumber , LCD_strLCDpinConfig [ RS ] .LCD_PinNumber , GPIO_STATE_RESET );
+                        GPIO_Error_2 = GPIO_Set_PinValue ( LCD_strLCDpinConfig [ RW ] .LCD_PortNumber , LCD_strLCDpinConfig [ RW ] .LCD_PinNumber , GPIO_STATE_RESET );
                     /*-------------*/ 
 
                     /*Data Transfer*/
                     for (int LCD_iter = 3; LCD_iter < LCD_PINs; LCD_iter++)
                         {
-                            U8 Local_Data_bit = ( ( Copy_u8Command & ( BIT00_MASK << LCD_iter-3 ) ) >> LCD_iter-3 );
-                            GPIO_Set_PinValue( LCD_strLCDpinConfig[ LCD_iter ].LCD_PortNumber , LCD_strLCDpinConfig[ LCD_iter ].LCD_PinNumber , Local_Data_bit );		
+                            U8 Local_Data_bit = ( ( Copy_u8Command & ( BIT00_MASK << (LCD_iter-3) ) ) >> (LCD_iter-3) );
+                            GPIO_Error_3 = GPIO_Set_PinValue( LCD_strLCDpinConfig[ LCD_iter ].LCD_PortNumber , LCD_strLCDpinConfig[ LCD_iter ].LCD_PinNumber , Local_Data_bit );		
                         }
                     /*-------------*/
 
                     /*Change Global variable to the next stage*/
                         G_LCD_EnablePinState = LCD_EnablePin_ON;
+                    /*--------------------------------------*/
+
+                    /*--------Error return Mechanism--------*/
+                        if (GPIO_Error_1 != GPIO_OK || GPIO_Error_2 != GPIO_OK || GPIO_Error_3 != GPIO_OK ) 
+                        {
+                            LCD_enuErrorStatus = LCD_enumNOK;
+                        }
+                        else 
+                        {
+                            LCD_enuErrorStatus = LCD_enumOK;
+                        }
+                        return LCD_enuErrorStatus;
                     /*--------------------------------------*/
 
                 break;
@@ -448,14 +485,19 @@
                         G_LCD_EnablePinState = LCD_EnablePin_OFF;
                     /*-------------------------------------------*/
 
+                    return  LCD_enumNOK;                        
+
                 break;
             }
+            return LCD_enuErrorStatus;
         }
     /*-----------------------------------------------------------------------------*/
 
     /*-------------------------------------WriteData-------------------------------*/
         static LCD_enuErrorStatus_t LCD_enuWriteData(U8 Copy_u8Data)
         {
+            extern const LCD_strLCDPinConfig_t LCD_strLCDpinConfig[];
+
             LCD_enuErrorStatus_t LCD_enuErrorStatus = LCD_enumOK;
 
             GPIO_Error_t GPIO_Error_1 = GPIO_NOK;
@@ -501,7 +543,6 @@
                         {
                             LCD_enuErrorStatus = LCD_enumOK;
                         }
-                        return LCD_enuErrorStatus;
                     /*--------------------------------------*/
                 break;
 
@@ -515,17 +556,19 @@
                         G_LCD_EnablePinState = LCD_EnablePin_OFF;
                     /*-------------------------------------------*/   
 
-                    return  LCD_enumNOK;           
+                    LCD_enuErrorStatus = LCD_enumNOK;           
 
                 break;
             }
-            
+            return LCD_enuErrorStatus;
         }
     /*-----------------------------------------------------------------------------*/
 
     /*----------------------------------CtrlEnablePin------------------------------*/
         static void LCD_CtrlEnablePin(U8 Copy_LCDEnablePinState)
         {
+            extern const LCD_strLCDPinConfig_t LCD_strLCDpinConfig[LCD_PINs];
+
             GPIO_Set_PinValue(LCD_strLCDpinConfig[ ET ].LCD_PortNumber, LCD_strLCDpinConfig[ ET ].LCD_PinNumber, Copy_LCDEnablePinState);
         }
     /*-----------------------------------------------------------------------------*/  
