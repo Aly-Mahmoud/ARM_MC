@@ -6,6 +6,7 @@ void Runnable_LCD_TASK (void)
 
     switch (counter)
     {
+        
         case 0:
             LCD_SetCursorPosAsync(2,2);
             counter ++;
