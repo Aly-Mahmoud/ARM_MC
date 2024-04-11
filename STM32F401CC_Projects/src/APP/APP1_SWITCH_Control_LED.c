@@ -9,10 +9,10 @@ void Runnable_SWITCH_Control_LED (void)
 
     if ( LOC_SWITCH_STATE == SWITCH_PRESSED )
     {
-        LED_SetStatus ( LED_SWITCH_1 , LED_SET_ON );
+        LED_SetStatus ( LED_Number_0 , LED_SET_ON );
     }
     else 
     {
-        LED_SetStatus ( LED_SWITCH_1 , LED_SET_OFF );
+        LED_SetStatus ( LED_Number_0 , LED_SET_OFF );
     }
 }

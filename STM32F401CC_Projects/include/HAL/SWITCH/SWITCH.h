@@ -6,8 +6,8 @@
 	#include "Std_Types.h"
     #include "Bit_Mask.h"
 
-    #define SW_PULL_UP             0x00000008
-    #define SW_PULL_DOWN           0x00000010
+    #define SW_PULL_UP              0x10000008  //0x10000008  -> 1000  -> 01000000010
+    #define SW_PULL_DOWN            0x10000010  //0x10000010  ->10000  -> 0x000000001
 
     #define SW_STATE_PRESSED        0x00000001
 

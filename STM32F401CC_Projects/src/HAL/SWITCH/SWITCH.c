@@ -2,13 +2,15 @@
 #include "MCAL/GPIO/GPIO.h"
 
 extern SWITCH_strSWITCHConfig_t SWITCH_arrOfStrSWITCHs[NUM_OF_SWITCHEs];
-U8 Switch_PhysicalState[NUM_OF_SWITCHEs];
+U32 Switch_PhysicalState[NUM_OF_SWITCHEs];
 
 GPIO_Error_t SWITCH_Init(void)
 {
     int iter;
 	GPIO_Error_t LOC_Status = GPIO_NOK;
 	GPIO_Pin_t Switch;    
+
+    Switch.Pin_Speed = GPIO_SPEED_HIGH;
 
     for(iter = 0; iter < NUM_OF_SWITCHEs ; iter++)
     {
@@ -35,7 +37,8 @@ GPIO_Error_t SWITCH_ReadState (SWITCHs_t SWITCH_Name,U8* SwitchState)
         else
         {
             // Calculate switch state based on physical state and connection configuration
-            *SwitchState = !( (Switch_PhysicalState[SWITCH_Name]) ^ ( (SWITCH_arrOfStrSWITCHs[SWITCH_Name].Connection) >> FOUR_BIT_OFFSET ) );
+            *SwitchState = !( (Switch_PhysicalState[SWITCH_Name]) ^ (( (SWITCH_arrOfStrSWITCHs[SWITCH_Name].Connection)  >> FOUR_BIT_OFFSET ) & 0x01) ) ;
+
             LOC_Status = GPIO_OK;
         }
  

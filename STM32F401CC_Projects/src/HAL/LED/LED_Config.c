@@ -15,43 +15,43 @@ const LED_strLEDConfig_t LED_arrOfStrLEDs[NUM_OF_LEDS] =
         .Init_Value=           Select value from enum Active State   ( LED_SET_OFF , LED_SET_ON )
     }
     */
-    [LED_RED]= 
+    [LED_Number_0]= 
     {
         .Port=                 GPIO_PORT_A,
         .Pin=                  GPIO_PIN_0,
         .Connection=           LED_Connection_FW,
         .Init_Value=           LED_SET_OFF
     }
-    ,
-    [LED_YELLOW]= 
-    {
-        .Port=                 GPIO_PORT_A,
-        .Pin=                  GPIO_PIN_1,
-        .Connection=           LED_Connection_FW,
-        .Init_Value=           LED_SET_OFF
-    }
-    ,
-    [LED_GREEN]= 
-    {
-        .Port=                 GPIO_PORT_A,
-        .Pin=                  GPIO_PIN_2,
-        .Connection=           LED_Connection_FW,
-        .Init_Value=           LED_SET_OFF
-    }    
-    ,
-    [LED_TOGGLE]= 
-    {
-        .Port          =    GPIO_PORT_A,                         
-        .Pin           =    GPIO_PIN_3,                        
-        .Connection    =    LED_Connection_FW,   
-        .Init_Value    =    LED_SET_OFF                        
-    }
-    ,
-    [LED_SWITCH_1]= 
-    {
-        .Port=                 GPIO_PORT_A, 
-        .Pin=                  GPIO_PIN_4,      
-        .Connection=           LED_Connection_FW,     
-        .Init_Value=           LED_SET_OFF
-    } 
+    // ,
+    // [LED_YELLOW]= 
+    // {
+    //     .Port=                 GPIO_PORT_A,
+    //     .Pin=                  GPIO_PIN_1,
+    //     .Connection=           LED_Connection_FW,
+    //     .Init_Value=           LED_SET_OFF
+    // }
+    // ,
+    // [LED_GREEN]= 
+    // {
+    //     .Port=                 GPIO_PORT_A,
+    //     .Pin=                  GPIO_PIN_2,
+    //     .Connection=           LED_Connection_FW,
+    //     .Init_Value=           LED_SET_OFF
+    // }    
+    // ,
+    // [LED_TOGGLE]= 
+    // {
+    //     .Port          =    GPIO_PORT_A,                         
+    //     .Pin           =    GPIO_PIN_3,                        
+    //     .Connection    =    LED_Connection_FW,   
+    //     .Init_Value    =    LED_SET_OFF                        
+    // }
+    // ,
+    // [LED_SWITCH_1]= 
+    // {
+    //     .Port=                 GPIO_PORT_A, 
+    //     .Pin=                  GPIO_PIN_4,      
+    //     .Connection=           LED_Connection_FW,     
+    //     .Init_Value=           LED_SET_OFF
+    //} 
  };

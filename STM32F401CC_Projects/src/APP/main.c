@@ -19,8 +19,8 @@
 #define LED_SWITCH_TEST         0
 #define NVIC_TEST               0
 #define SYSTICK_TEST            0
-#define SCHEDULER_TEST          0
-#define SCHEDULER_LCD_TEST      1
+#define SCHEDULER_TEST          1
+#define SCHEDULER_LCD_TEST      0
 
 
 #if RCC_TEST

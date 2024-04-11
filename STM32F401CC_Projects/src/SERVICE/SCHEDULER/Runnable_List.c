@@ -1,12 +1,12 @@
 #include "SERVICE/SCHEDULER/SCHEDULER.h"
 #include "SERVICE/SCHEDULER/Runnable_List.h"
 
-extern void Runnable_LED_Toggle_TASK(void);
+// extern void Runnable_LED_Toggle_TASK(void);
 extern void Runnable_GET_SWITCH_STATE_TASK(void);
 extern void Runnable_SWITCH_Control_LED(void);
-extern void Runnable_TrafficLight_StateMachine(void);
-extern void LCD_Runnable_Manager(void);
-extern void Runnable_LCD_TASK (void);
+// extern void Runnable_TrafficLight_StateMachine(void);
+// extern void LCD_Runnable_Manager(void);
+// extern void Runnable_LCD_TASK (void);
 
 Runnable_t Runnables[] =
                                     {
@@ -20,20 +20,20 @@ Runnable_t Runnables[] =
                                         }
                                         ,
                                     */
-                                        [LCD_Runnable_Mngr]=
+                                        [Switch_Reading]=
                                         {
-                                            .name          =  "LCD",
+                                            .name          =  "Switch",
                                             .PeriodicityMs =  2,
-                                            .CB            =  LCD_Runnable_Manager,
-                                            .delayms       =  40,
+                                            .CB            =  Runnable_GET_SWITCH_STATE_TASK,
+                                            .delayms       =  0,
                                         }
                                         ,
-                                        [LCD_APP]=
+                                        [Switch_Control]=
                                         {
-                                            .name          =  "LCD_APP",
-                                            .PeriodicityMs =  20,
-                                            .CB            =  Runnable_LCD_TASK,
-                                            .delayms       =  1000,
+                                            .name          =  "SWITCH_Ctrl",
+                                            .PeriodicityMs =  2,
+                                            .CB            =  Runnable_SWITCH_Control_LED,
+                                            .delayms       =  3,
                                         }
 
                                     };
